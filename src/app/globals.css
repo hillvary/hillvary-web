@@ -1,0 +1,106 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* The storefront is a fixed light brand look; only the /admin dashboard opts
+   into dark mode, toggled via a `.dark` class (not system preference). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Licensed fonts — see public/fonts/README.md. Falls back to the Google Font
+   variables (--font-body-fallback / --font-display-fallback) below if these
+   files aren't present, so the build never breaks on a missing font. */
+@font-face {
+  font-family: "Helvetica Now Display";
+  src: url("/fonts/HelveticaNowDisplay-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Now Display";
+  src: url("/fonts/HelveticaNowDisplay-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Now Display";
+  src: url("/fonts/HelveticaNowDisplay-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Moldin Demo";
+  src: url("/fonts/MoldinDemo-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #f2efe8;
+  --foreground: #16150f;
+  --muted: #8c897d;
+  --muted-foreground: #6b6a61;
+  --border: rgba(20, 20, 16, 0.12);
+  --accent: #ee7c33;
+  --accent-foreground: #ffffff;
+  --surface: #e9e5db;
+  --surface-dark: #1c1b17;
+  --ring: var(--accent);
+  /* Brand-mapped so shadcn-style primitives (built against primary/secondary/
+     destructive) render in Hillvary's own palette instead of generic ones. */
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-foreground);
+  --secondary: var(--surface-dark);
+  --secondary-foreground: var(--background);
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-surface: var(--surface);
+  --color-surface-dark: var(--surface-dark);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --font-body: "Helvetica Now Display", var(--font-body-fallback), Arial, sans-serif;
+  --font-display: "Moldin Demo", var(--font-display-fallback), "Arial Black", sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+}
+
+* {
+  border-color: var(--border);
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee-scroll 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
